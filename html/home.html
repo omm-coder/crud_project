@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../imges/feather.svg" type="image/x-icon" />
+    <title>Project Based Crud</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <section>
+      <header>
+        <div class="logo">
+          <img src="../imges/logo.png" alt="" />
+          <h1>MYP</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Abot</a></li>
+            <li><a href="#">Add</a></li>
+          </ul>
+          <i class="fa-solid fa-sun" id="theme"></i>
+        </nav>
+      </header>
+      <main>
+        <h1 id="indicator" class="show-success"></h1>
+        <button id="add">ADD</button>
+        <p id="empty">Empty Table</p>
+        <div class="model-add" id="model-add">
+          <i class="fa-solid fa-xmark" id="x-icon"></i>
+          <form action="#" class="form" id="form">
+            <h1 id="model-h">Registration</h1>
+            <div class="formControl">
+              <label for="name">User Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="input"
+                placeholder="Enter username"
+              />
+              <div class="error-message" id="name"></div>
+            </div>
+            <div class="formControl">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                class="input"
+                placeholder="Enter address"
+              />
+              <div class="error-message" id="address"></div>
+            </div>
+            <div class="formControl">
+              <label for="emai">User Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="input"
+                placeholder="Enter email"
+              />
+              <div class="error-message" id="email"></div>
+            </div>
+            <div class="formControl">
+              <label for="password">password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="input"
+                placeholder="Enter password"
+              />
+              <div class="error-message" id="password"></div>
+            </div>
+            <button type="submit" id="modelClose-button" class="btn">
+              Register
+            </button>
+          </form>
+        </div>
+        <div class="table-wrapper" id="table">
+          <table>
+            <thead>
+              <td>ID</td>
+              <th>Name</th>
+              <th>address</th>
+              <th>email</th>
+              <th>password</th>
+              <th colspan="2">Action</th>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </main>
+    </section>
+
+    <!-- script js  -->
+    <script src="../js/index.js"></script>
+  </body>
+</html>
