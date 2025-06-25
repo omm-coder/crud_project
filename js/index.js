@@ -95,12 +95,8 @@ function makeValidation() {
   return { displayErrorMessage, isAllValid, clearAllInputs };
 }
 
-
 function editUser(id) {
-
   let user = users.find((user) => user.ID == id);
-
-
 
   user.name = allinputTags[0].value;
   user.address = allinputTags[1].value;
@@ -143,8 +139,8 @@ function readAllUsers(arrayOfUsers) {
     let icon = document.createElement("i");
     icon.classList.add("fa-regular", "fa-pen-to-square");
     icon.addEventListener("click", (e) => {
-      model.classList.add('show-model');
-      model.classList.add('add-animate');
+      model.classList.add("show-model");
+      model.classList.add("add-animate");
       document.querySelector("#model-h").textContent = "Update User";
       modelBtn_close.textContent = "Save";
       const row = e.target.closest("tr");
@@ -156,7 +152,6 @@ function readAllUsers(arrayOfUsers) {
       allinputTags[2].value = cells[3].textContent;
       allinputTags[3].value = cells[4].textContent;
 
-    
       userID = rowId;
     });
 
@@ -233,13 +228,13 @@ function storeData() {
 }
 //event listeners
 modelBtn_add.addEventListener("click", () => {
-  model.classList.add('show-model');
-  model.classList.add('add-animate');
+  model.classList.add("show-model");
+  model.classList.add("add-animate");
 });
-document.querySelector('#x-icon').addEventListener('click', () => {
-  model.classList.remove('show-model');
-  model.classList.remove('add-animate');
-})
+document.querySelector("#x-icon").addEventListener("click", () => {
+  model.classList.remove("show-model");
+  model.classList.remove("add-animate");
+});
 my_form.addEventListener("submit", (e) => {
   e.preventDefault();
   let { isAllValid, clearAllInputs } = makeValidation();
@@ -249,12 +244,12 @@ my_form.addEventListener("submit", (e) => {
       model.style.visibility = "hidden";
     }, 400);
     if (modelBtn_close.textContent === "Save") {
-     setTimeout(() => {
+      setTimeout(() => {
         showAddedMessage(indicator, "updated Success Fully!!!", 1);
-       editUser(userID);
-       document.querySelector("#model-h").textContent = "Registeration";
-       modelBtn_close.textContent = "Register";
-     })
+        editUser(userID);
+        document.querySelector("#model-h").textContent = "Registeration";
+        modelBtn_close.textContent = "Register";
+      });
     } else {
       setTimeout(() => {
         showAddedMessage(indicator, "Added Success Fully!!!", 1);
