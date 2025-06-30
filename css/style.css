@@ -97,8 +97,13 @@ main .show-success {
   text-transform: uppercase;
   opacity: 0;
 }
-main button {
-  margin: 60px 0 10px;
+.frow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+.frow button {
   border: none;
   padding: 10px 36px;
   background-color: hsl(248, 53%, 58%);
@@ -107,9 +112,27 @@ main button {
   font-size: 22px;
   box-sizing: border-box;
 }
-main button:hover {
+.frow button:hover {
   background-color: hsl(248, 53%, 68%);
   transform: scale(1.05);
+}
+.frow .search {
+  position: relative;
+}
+.frow .search input {
+  padding: 8px 18px;
+  width: 100%;
+  font-size: 24px;
+  border: 1px solid lightgrey;
+  margin: 10px 10px 0 0;
+  border-radius: 8px;
+}
+.frow .search i {
+  position: absolute;
+  bottom: 20%;
+  right: 0;
+  margin-right: 10px;
+  font-size: 22px;
 }
 #empty {
   position: absolute;

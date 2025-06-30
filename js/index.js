@@ -8,6 +8,8 @@ let p_empty = document.querySelector("#empty"); // show empty if the table has n
 let my_form = document.querySelector("#form"); // this is the form element and it hass all the tags now
 let allinputTags = document.getElementsByClassName("input");
 let diverror = document.getElementsByClassName("error-message");
+let search_input = document.getElementById('search');
+let search_icon = document.getElementById('search-icon')
 
 let table = document.querySelector("#table"); //THIS ONE IS DIV WHICH HAS THE TABLE
 let tbody = document.querySelector("#tbody");
@@ -51,6 +53,13 @@ const showAddedMessage = (h1, message, opacity) => {
   h1.style.opacity = opacity;
   if (opacity == 1) h1.classList.add("add-animate");
 };
+
+//this function cleares al input tags
+const clearAllInputs = () => {
+  Array.from(allinputTags).forEach((input) => {
+    input.value = "";
+  });
+};
 //this function make validation
 function makeValidation() {
   let isValidated = true;
@@ -85,12 +94,6 @@ function makeValidation() {
     }
   });
 
-  const clearAllInputs = () => {
-    Array.from(allinputTags).forEach((input) => {
-      input.value = "";
-    });
-  };
-
   const isAllValid = () => isValidated;
   return { displayErrorMessage, isAllValid, clearAllInputs };
 }
@@ -107,6 +110,16 @@ function editUser(id) {
 
   localStorage.setItem("users", JSON.stringify(users));
   renderUser();
+}
+//search filter function 
+function search(word) {
+  let listValueNames;
+  // users.forEach(element => {
+  //   listValueNames = element.name;
+  // });
+  listValueNames = users.filter(user => user.name.includes(word))
+  console.log(listValueNames);
+  renderUser(listValueNames)
 }
 //this function makes strore&read data to from localstorage
 function deleteUser(id) {
@@ -143,6 +156,7 @@ function readAllUsers(arrayOfUsers) {
       model.classList.add("add-animate");
       document.querySelector("#model-h").textContent = "Update User";
       modelBtn_close.textContent = "Save";
+
       const row = e.target.closest("tr");
       const cells = row.querySelectorAll("td");
       const rowId = cells[0].textContent;
@@ -188,15 +202,14 @@ function readAllUsers(arrayOfUsers) {
     tbody.appendChild(tr);
   });
 }
-function renderUser() {
-  if (users.length !== 0) {
+function renderUser(all) {
+  if (all.length !== 0) {
     table.style.opacity = "1";
     p_empty.style.opacity = "0";
     // read all users from localStorage
     // let AllUsers = JSON.parse(localStorage.getItem("users"));
     table.querySelector("table").tBodies[0].innerHTML = "";
-    readAllUsers(users);
-    // alert(table.querySelector("table").tBodies[0].rows[1].cells[0].textContent);
+    readAllUsers(all);
   } else {
     table.style.opacity = "0";
     p_empty.style.opacity = "1";
@@ -230,14 +243,17 @@ function storeData() {
 modelBtn_add.addEventListener("click", () => {
   model.classList.add("show-model");
   model.classList.add("add-animate");
+  document.querySelector("#model-h").textContent = "Registeration";
+  modelBtn_close.textContent = "Register";
 });
 document.querySelector("#x-icon").addEventListener("click", () => {
   model.classList.remove("show-model");
   model.classList.remove("add-animate");
+  clearAllInputs();
 });
 my_form.addEventListener("submit", (e) => {
   e.preventDefault();
-  let { isAllValid, clearAllInputs } = makeValidation();
+  let { isAllValid} = makeValidation();
   let isValid = isAllValid();
   if (isValid) {
     setTimeout(() => {
@@ -262,6 +278,10 @@ my_form.addEventListener("submit", (e) => {
     }, 4000);
   }
 });
+
+search_icon.addEventListener('click', ()  => {
+  search(search_input.value)
+})
 
 renderUser(users);
 
