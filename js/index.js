@@ -8,8 +8,8 @@ let p_empty = document.querySelector("#empty"); // show empty if the table has n
 let my_form = document.querySelector("#form"); // this is the form element and it hass all the tags now
 let allinputTags = document.getElementsByClassName("input");
 let diverror = document.getElementsByClassName("error-message");
-let search_input = document.getElementById('search');
-let search_icon = document.getElementById('search-icon')
+let search_input = document.getElementById("search");
+let search_icon = document.getElementById("search-icon");
 
 let table = document.querySelector("#table"); //THIS ONE IS DIV WHICH HAS THE TABLE
 let tbody = document.querySelector("#tbody");
@@ -33,6 +33,7 @@ function success(id) {
     }
   });
 }
+
 function getMessageError(id) {
   switch (id) {
     case "name":
@@ -60,6 +61,8 @@ const clearAllInputs = () => {
     input.value = "";
   });
 };
+
+
 //this function make validation
 function makeValidation() {
   let isValidated = true;
@@ -98,6 +101,7 @@ function makeValidation() {
   return { displayErrorMessage, isAllValid, clearAllInputs };
 }
 
+//edit user function
 function editUser(id) {
   let user = users.find((user) => user.ID == id);
 
@@ -109,26 +113,27 @@ function editUser(id) {
   console.log(user);
 
   localStorage.setItem("users", JSON.stringify(users));
-  renderUser();
+  renderUser(users);
 }
-//search filter function 
+
+//search filter function
 function search(word) {
   let listValueNames;
-  // users.forEach(element => {
-  //   listValueNames = element.name;
-  // });
-  listValueNames = users.filter(user => user.name.includes(word))
+  listValueNames = users.filter((user) => user.name.includes(word));
   console.log(listValueNames);
-  renderUser(listValueNames)
+  renderUser(listValueNames);
 }
-//this function makes strore&read data to from localstorage
+
+//this function makes delete user
 function deleteUser(id) {
-  // const users = JSON.parse(localStorage.getItem("users"));
+
   let index = users.findIndex((user) => user.ID == id);
   users.splice(index, 1);
   localStorage.setItem("users", JSON.stringify(users));
   console.log(JSON.stringify(users, 2));
 }
+
+
 function readAllUsers(arrayOfUsers) {
   arrayOfUsers.forEach((user) => {
     //create the tr and it's tds
@@ -202,6 +207,7 @@ function readAllUsers(arrayOfUsers) {
     tbody.appendChild(tr);
   });
 }
+
 function renderUser(all) {
   if (all.length !== 0) {
     table.style.opacity = "1";
@@ -215,6 +221,8 @@ function renderUser(all) {
     p_empty.style.opacity = "1";
   }
 }
+
+//genratiing an id of user
 let countID = Number(localStorage.getItem("userIDCounter")) || 1;
 const countUserID = () => {
   return () => {
@@ -224,8 +232,8 @@ const countUserID = () => {
     return current;
   };
 };
+
 function storeData() {
-  // let users = JSON.parse(localStorage.getItem("users")) || [];
   let generateID = countUserID();
   let userId = generateID();
   users.push({
@@ -239,26 +247,33 @@ function storeData() {
   localStorage.setItem("users", JSON.stringify(users));
   renderUser(users);
 }
+
+
 //event listeners
+
 modelBtn_add.addEventListener("click", () => {
   model.classList.add("show-model");
   model.classList.add("add-animate");
   document.querySelector("#model-h").textContent = "Registeration";
   modelBtn_close.textContent = "Register";
+  clearAllInputs();
 });
+
 document.querySelector("#x-icon").addEventListener("click", () => {
   model.classList.remove("show-model");
   model.classList.remove("add-animate");
   clearAllInputs();
 });
+
 my_form.addEventListener("submit", (e) => {
   e.preventDefault();
-  let { isAllValid} = makeValidation();
+  let { isAllValid } = makeValidation();
   let isValid = isAllValid();
   if (isValid) {
     setTimeout(() => {
-      model.style.visibility = "hidden";
-    }, 400);
+      // model.style.visibility = "hidden";
+      model.classList.toggle('show-model')
+    }, 100);
     if (modelBtn_close.textContent === "Save") {
       setTimeout(() => {
         showAddedMessage(indicator, "updated Success Fully!!!", 1);
@@ -266,7 +281,8 @@ my_form.addEventListener("submit", (e) => {
         document.querySelector("#model-h").textContent = "Registeration";
         modelBtn_close.textContent = "Register";
       });
-    } else {
+    } 
+    else {
       setTimeout(() => {
         showAddedMessage(indicator, "Added Success Fully!!!", 1);
         storeData();
@@ -279,9 +295,10 @@ my_form.addEventListener("submit", (e) => {
   }
 });
 
-search_icon.addEventListener('click', ()  => {
-  search(search_input.value)
-})
+search_icon.addEventListener("click", () => {
+  search(search_input.value);
+});
+
 
 renderUser(users);
 
