@@ -65,7 +65,7 @@ const clearAllInputs = () => {
 };
 
 
-//this function make validation
+// //this function make validation
 function makeValidation() {
   let isValidated = true;
 
@@ -304,7 +304,8 @@ search_icon.addEventListener("click", () => {
 
 renderUser(users);
 
-//UI theme changer
+
+// UI theme changer
 if (localStorage.getItem("theme") !== "dark-theme") {
   document.body.classList.remove("dark-theme");
   themeIcon.classList.replace("fa-moon", "fa-sun");
