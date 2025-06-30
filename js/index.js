@@ -8,6 +8,7 @@ let p_empty = document.querySelector("#empty"); // show empty if the table has n
 let my_form = document.querySelector("#form"); // this is the form element and it hass all the tags now
 let allinputTags = document.getElementsByClassName("input");
 let diverror = document.getElementsByClassName("error-message");
+
 let search_input = document.getElementById("search");
 let search_icon = document.getElementById("search-icon");
 
@@ -20,6 +21,7 @@ let anchor_tags = document.querySelectorAll("li a");
 
 let model_update = document.querySelector("#model-update");
 
+//global variables
 let users = JSON.parse(localStorage.getItem("users")) || [];
 let userID;
 
